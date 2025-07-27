@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 @Getter
@@ -29,6 +32,8 @@ public class User {
 
     @Column(name = "lastName", nullable = false)
     private String lastName;
-
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Address> addresses = new ArrayList<>();
 
 }

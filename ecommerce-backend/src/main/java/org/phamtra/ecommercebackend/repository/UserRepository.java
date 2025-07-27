@@ -1,0 +1,9 @@
+package org.phamtra.ecommercebackend.repository;
+
+import org.phamtra.ecommercebackend.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+}
