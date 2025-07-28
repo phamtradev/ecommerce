@@ -4,29 +4,33 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+import java.time.Instant;
+
 @Entity
 @Table(name = "products")
+@Getter
+@Setter
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private long id;
 
-    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @Column(name = "short_description", nullable = false)
-    private String shortDescription;
+    @Column(columnDefinition = "NVARCHAR(MAX)")
+    private String description;
 
-    @Column(name = "long_description")
-    private String longDescription;
+    private String address;
 
-    @Column(name = "price", nullable = false)
-    private Double price;
+    private String logo;
 
-    @OneToOne(mappedBy = "product", cascade = CascadeType.REMOVE, optional = false, orphanRemoval = true)
-    private Inventory inventory;
+    private Instant createdAt;
 
+    private Instant updatedAt;
+
+    private String createdBy;
+
+    private String updatedBy;
 }

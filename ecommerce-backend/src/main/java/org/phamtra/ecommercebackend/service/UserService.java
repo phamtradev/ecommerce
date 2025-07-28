@@ -39,12 +39,9 @@ public class UserService {
     public User handleUpdateUser(User user) {
         User currentUser = this.fetchUserById(user.getId());
         if (currentUser != null) {
-            currentUser.setUsername(user.getUsername());
+            currentUser.setName(user.getName());
             currentUser.setPassword(user.getPassword());
             currentUser.setEmail(user.getEmail());
-            currentUser.setFirstName(user.getFirstName());
-            currentUser.setLastName(user.getLastName());
-
             return this.userRepository.save(currentUser);
         }
         return null;
