@@ -2,11 +2,11 @@ package org.phamtra.ecommercebackend.controller;
 
 import org.phamtra.ecommercebackend.model.User;
 import org.phamtra.ecommercebackend.service.UserService;
+import org.phamtra.ecommercebackend.service.error.IdInvalidException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -36,7 +36,10 @@ public class UserController {
     }
 
     @DeleteMapping("/users/{id}")
-    public String deleteUser(@PathVariable long id) {
+    public String deleteUser(@PathVariable long id) throws IdInvalidException {
+        if (id >= 1500) {
+            throw new IdInvalidException("Id khong lon hon 1500");
+        }
         this.userService.handleDeleteUser(id);
         return "succesfully";
     }
