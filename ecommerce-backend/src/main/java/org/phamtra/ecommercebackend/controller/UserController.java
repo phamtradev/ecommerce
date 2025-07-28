@@ -18,31 +18,32 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/user")
-    public ResponseEntity<?> createNewUser(@RequestBody User user) {
+    @PostMapping("/users")
+    public ResponseEntity<User> createNewUser(@RequestBody User user) {
         User newUser = this.userService.handleCreateUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
 
-    @GetMapping("/user/{id}")
-    public User getUserById(@PathVariable long id) {
-        return this.userService.fetchUserById(id);
+    @GetMapping("/users/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable long id) {
+        User user = this.userService.fetchUserById(id);
+        return ResponseEntity.ok().body(user);
     }
 
-    @GetMapping("/user")
-    public List<User> getAllUser() {
-        return this.userService.fetchAllUser();
+    @GetMapping("/users")
+    public ResponseEntity<?> getAllUser() {
+        return ResponseEntity.ok().body(this.userService.fetchAllUser());
     }
 
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/users/{id}")
     public String deleteUser(@PathVariable long id) {
         this.userService.handleDeleteUser(id);
         return "succesfully";
     }
 
-    @PutMapping("/user")
-    public User updateUser(@RequestBody User user) {
+    @PutMapping("/users")
+    public ResponseEntity<User> updateUser(@RequestBody User user) {
         User newUser = this.userService.handleUpdateUser(user);
-        return newUser;
+        return ResponseEntity.ok(newUser);
     }
 }
