@@ -2,7 +2,7 @@ package org.phamtra.ecommercebackend.controller;
 
 import org.phamtra.ecommercebackend.model.User;
 import org.phamtra.ecommercebackend.service.UserService;
-import org.phamtra.ecommercebackend.service.error.IdInvalidException;
+import org.phamtra.ecommercebackend.error.IdInvalidException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
