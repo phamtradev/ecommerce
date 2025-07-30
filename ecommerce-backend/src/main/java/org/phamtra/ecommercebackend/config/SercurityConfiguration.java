@@ -28,15 +28,17 @@ public class SercurityConfiguration {
 //        };
 
         http
+                .csrf(c -> c.disable())
                 .authorizeHttpRequests(
                         authz -> authz
                                 .requestMatchers("/").permitAll()
-                                .anyRequest().authenticated()
+//                                .anyRequest().authenticated()
+                                .anyRequest().permitAll()
                         //.requestMatchers(whiteList).permitAll()
                 )
+                .formLogin(f -> f.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }
-
 
 }
