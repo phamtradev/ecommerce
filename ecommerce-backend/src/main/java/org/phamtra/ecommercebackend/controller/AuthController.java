@@ -1,6 +1,7 @@
 package org.phamtra.ecommercebackend.controller;
 
 import org.phamtra.ecommercebackend.dto.LoginDTO;
+import org.phamtra.ecommercebackend.util.SecurityUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -16,8 +17,11 @@ public class AuthController {
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    public AuthController(AuthenticationManagerBuilder authenticationManagerBuilder) {
+    private final SecurityUtil securityUtil;
+
+    public AuthController(AuthenticationManagerBuilder authenticationManagerBuilder, SecurityUtil securityUtil) {
         this.authenticationManagerBuilder = authenticationManagerBuilder;
+        this.securityUtil = securityUtil;
     }
 
     @PostMapping("/login")
@@ -25,6 +29,9 @@ public class AuthController {
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword());
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+
+        //create token
+        this.securityUtil.createToken(authentication);
 
         return ResponseEntity.ok().body(loginDTO);
     }
