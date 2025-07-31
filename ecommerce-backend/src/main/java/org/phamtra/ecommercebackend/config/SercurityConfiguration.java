@@ -54,8 +54,6 @@ public class SercurityConfiguration {
     }
 
     //jwt
-
-
     private SecretKey getSecretKey() {
         byte[] keyBytes = Base64.from(jwtKey).decode(); //giai ma key
         return new SecretKeySpec(keyBytes, 0, keyBytes.length, SecurityUtil.JWT_ALGORITHM.getName());
