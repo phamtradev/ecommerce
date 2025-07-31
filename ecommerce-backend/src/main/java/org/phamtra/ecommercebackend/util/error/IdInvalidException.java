@@ -1,4 +1,4 @@
-package org.phamtra.ecommercebackend.error;
+package org.phamtra.ecommercebackend.util.error;
 
 public class IdInvalidException extends Exception {
     public IdInvalidException(String message) {

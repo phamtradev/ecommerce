@@ -1,5 +1,6 @@
 package org.phamtra.ecommercebackend.controller;
 
+import jakarta.validation.Valid;
 import org.phamtra.ecommercebackend.dto.LoginDTO;
 import org.phamtra.ecommercebackend.dto.ResLoginDTO;
 import org.phamtra.ecommercebackend.util.SecurityUtil;
@@ -26,7 +27,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ResLoginDTO> login(@RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<ResLoginDTO> login(@Valid @RequestBody LoginDTO loginDTO) {
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword());
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
